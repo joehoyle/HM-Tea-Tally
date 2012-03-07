@@ -1,0 +1,37 @@
+
+.wrapper {
+
+max-width: 320px;
+
+}
+
+.header {
+
+width: 100%;
+margin: 15px 15px 5px auto;
+text-align: left;
+background: #587FB0;
+
+}
+
+.entry-title {
+
+}
+
+.entry-content {
+
+padding: 0 0px 0 0px;
+
+}
+
+form {
+
+display: block;
+width: 60%;
+
+}
+
+
+}
+
+* { background: red !important; }

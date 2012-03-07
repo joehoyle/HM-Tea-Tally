@@ -1,0 +1,11 @@
+
+# BEGIN BackUpWordPress
+# This .htaccess file ensures that other people cannot download your backup files.
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{QUERY_STRING} !key=2b642b31eb296a0c47ec8adbad91144c
+RewriteRule (.*) - [F]
+</IfModule>
+
+# END BackUpWordPress
