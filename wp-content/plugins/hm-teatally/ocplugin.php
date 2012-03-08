@@ -100,27 +100,6 @@ function hm_tt_custom_css() {
     echo "<link rel='stylesheet' type='text/css' href='$url' />\n";
 }
 
-
-/**
- * hm_tt_menu function adds a menu page to WordPress admin panel.
- * 
- * @access public
- * @return void
- 
- 
-function hm_tt_menu() {
-	add_management_page( 'HM Tea Tally', 'HM Tea Tally', 'edit_posts', 'my_plugin_options', 'hm_tt_draw');
-}
-
-function my_plugin_options() {
-	if (!current_user_can('manage_options'))  {
-		wp_die( __('You do not have sufficient permissions to access this page.') );
-	}
-	
-}
-*/
-
-
 /**
  * hm_tt_draw function draws the table of people & dots. Followed by the forms.
  *	Drop down menu post value is tea_maker 
@@ -172,7 +151,48 @@ function hm_tt_draw() {
 		<?php endforeach;  ?>
 	</div>
 	</div>
-		<div class="hm_tt_form1">
+	<?php 	
+		
+}
+
+function hm_tt_draw_add_user() {
+	?>
+	<div class="hm_tt_form2">
+		<form method="post">
+		
+			<input type="text" name="hm_member" />
+			<input type="hidden" name="hm_tt_action" value="add_member" />
+			<input type="text" name="blips" value="0" />
+			<br />
+			<input class="button-primary" type="submit" ?>
+			
+		</form>
+	</div>
+	<?php
+}
+
+function hm_tt_draw_update_user() {
+	?>
+	<div class="hm_tt_form3">
+		<form method="post">
+		
+		<input type="hidden" name="hm_tt_action" value="member_update" />
+			<select name="member_updatee">
+			<?php foreach( hm_tt_get_tally() as $name => $dots ): ?>
+				<option><?php echo $name ?></option>
+			<?php endforeach ?>
+			</select>
+		<input type="number" name="hm_tt_update_amount" />
+		<br />
+		<input class="button-primary" type="submit" value="Save" />
+		</form>
+	</div>
+	<?php
+}
+
+function hm_tt_draw_update_tally() {
+	?>
+	<div class="hm_tt_form1">
 		<form method="post">
 		
 			<input type="hidden" name="hm_tt_action" value="tally_update" />
@@ -188,39 +208,9 @@ function hm_tt_draw() {
 			<input class="button-primary" type="submit" value="Save" />
 			
 		</form>
-		</div>
-	
-		<div class="hm_tt_form2">
-		<form method="post">
-		
-			<input type="text" name="hm_member" />
-			<input type="hidden" name="hm_tt_action" value="add_member" />
-			<input type="text" name="blips" value="0" />
-			<br />
-			<input class="button-primary" type="submit" ?>
-			
-		</form>
-		</div>
-		<div class="hm_tt_form3">
-		<form method="post">
-		
-		<input type="hidden" name="hm_tt_action" value="member_update" />
-			<select name="member_updatee">
-			<?php foreach( hm_tt_get_tally() as $name => $dots ): ?>
-				<option><?php echo $name ?></option>
-			<?php endforeach ?>
-			</select>
-		<input type="number" name="hm_tt_update_amount" />
-		<br />
-		<input class="button-primary" type="submit" value="Save" />
-		</form>
-		</div>
-	</div>	
-	<?php 	
-		
+	</div>
+	<?php
 }
-
-
 /**
  * This function requires the arguments $name and $blips. 
  * Wirtten if statement which uses the function and adds the $_POST data to function arguements.
